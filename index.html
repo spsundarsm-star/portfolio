@@ -7,7 +7,7 @@
 <meta name="description" content="Sundaramoorthi S is a UI and visual designer with 7+ years of experience in logos, marketing materials and websites.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@600&family=Press+Start+2P&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js');</script>
 <noscript><style>.splash{display:none!important}</style></noscript>
 <style>
@@ -164,6 +164,11 @@
   .cover-doodle.jig { animation: cdjig .85s cubic-bezier(.3,1.4,.5,1); }
   @keyframes cdjig { 0% { transform: none; } 25% { transform: translateY(-9px) rotate(-5deg) scale(1.04); } 55% { transform: translateY(0) rotate(4deg); } 80% { transform: rotate(-2deg); } 100% { transform: none; } }
   .stitch { position: absolute; inset: 14px; border: 2px dashed rgba(74,52,23,.45); border-radius: 6px; }
+  /* ---------- "try me" call to action ---------- */
+  .tryme { display: flex; flex-direction: column; align-items: center; }
+  .try-arrow { display: block; width: 52px; height: auto; margin-top: 1.5rem; image-rendering: pixelated; filter: drop-shadow(0 6px 0 rgba(0,0,0,.25)); animation: arrowhop .9s steps(1, end) infinite; }
+  @keyframes arrowhop { 0%, 49.99% { transform: translateY(0); } 50%, 100% { transform: translateY(9px); } }
+  @keyframes tryhop { 0%, 55%, 100% { translate: 0 0; } 25% { translate: 0 -.3em; } }
   .stage-grid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; -webkit-mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); }
   .stage-shapes { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
   .fl { transition: transform .35s ease-out; }
@@ -178,19 +183,16 @@
   .stage .book { animation: bookfloat 6s ease-in-out infinite; }
   @keyframes bookfloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
   .book-in { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .3s ease-out; }
-  .wrapup { position: relative; margin-top: 3rem; padding: 6rem 1rem 5rem; text-align: center; overflow: hidden; touch-action: manipulation; }
+  .wrapup { position: relative; margin-top: 3rem; padding: 5rem 1rem 4.5rem; text-align: center; overflow: hidden; touch-action: manipulation; }
   .wrapup > *:not(canvas) { position: relative; }
   #wrapGrid { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; -webkit-mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); mask-image: radial-gradient(ellipse at center, #000 35%, transparent 75%); }
-  .floaters { height: 156px; margin-bottom: .5rem; }
-  .floaters svg { width: 240px; height: 156px; overflow: visible; }
-  .shape { will-change: transform; }
   .float { animation: bob 4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
   @keyframes bob { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-10px) rotate(8deg); } }
-  .wrapup h2 { margin: 0; font-family: var(--head); font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -.03em; }
+  .wrapup h2 { margin: 0; font-family: "Press Start 2P", var(--mono), monospace; font-weight: 400; font-size: clamp(1.6rem, 6.4vw, 2.9rem); line-height: 1.25; letter-spacing: .02em; color: var(--sun); text-shadow: 4px 4px 0 #f2674f, 8px 8px 0 rgba(0,0,0,.4); }
   .wrapup h2 .w { display: inline-block; white-space: nowrap; }
-  .wrapup h2 .ch { display: inline-block; transform: translateY(calc(var(--l, 0) * -12px)) scale(calc(1 + var(--l, 0) * .16)); color: color-mix(in srgb, var(--butter) calc(var(--l, 0) * 100%), var(--paper)); will-change: transform; }
+  .wrapup h2 .ch { display: inline-block; transform: translateY(calc(var(--l, 0) * -12px)) scale(calc(1 + var(--l, 0) * .16)); color: color-mix(in srgb, var(--paper) calc(var(--l, 0) * 100%), var(--sun)); will-change: transform; animation: tryhop 2.6s ease-in-out infinite; animation-delay: calc(var(--i, 0) * .1s); }
   /* ---------- three games in a row ---------- */
-  .games { width: min(460px, 100%); margin: 2.6rem auto 0; }
+  .games { width: min(460px, 100%); margin: 1.1rem auto 0; }
 
   /* ---------- colour-matching game ---------- */
   .game { min-height: 430px; padding: 1.3rem 1.4rem 1.4rem; text-align: left; background: rgba(27,28,30,.92); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 24px 50px -28px rgba(0,0,0,.8); display: flex; flex-direction: column; }
@@ -219,7 +221,6 @@
   .res-rank { font-family: var(--head); font-weight: 600; font-size: 1.25rem; }
   .res-dots { display: grid; grid-template-columns: repeat(auto-fit, minmax(52px, 1fr)); gap: .5rem; }
   .res-dots span { height: 46px; border-radius: 10px; display: flex; align-items: flex-end; padding: .35rem .5rem; font-family: var(--mono); font-size: .7rem; color: #fff; background: #2a2b2e; text-shadow: 0 1px 2px rgba(0,0,0,.6); border: 1px solid rgba(255,255,255,.12); }
-  .wrapup p { margin: .5rem 0 0; color: var(--grey); font-family: var(--mono); font-size: .85rem; }
 
   /* ---------- about ---------- */
   .eyebrow { font-family: var(--mono); font-size: .8rem; color: var(--grey); }
@@ -264,17 +265,24 @@
   .ring.show .arr { opacity: 1; }
 
   /* ---------- contact overlay ("workshop" style) ---------- */
-  .overlay { position: fixed; inset: 0; z-index: 300; display: none; align-items: center; justify-content: center; background: rgba(8,8,9,.9); backdrop-filter: blur(8px); padding: 1.5rem; overflow-y: auto; }
+  .overlay { position: fixed; inset: 0; z-index: 300; display: none; align-items: flex-start; justify-content: center; background: rgba(8,8,9,.9); backdrop-filter: blur(8px); padding: max(1.5rem, env(safe-area-inset-top)) 1.5rem max(1.5rem, env(safe-area-inset-bottom)); overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+@supports (height: 100dvh) { .overlay { height: 100dvh; bottom: auto; } }
   .overlay.open { display: flex; animation: fadeIn .3s ease both; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .ov-in { width: min(900px, 100%); position: relative; }
-  .ov-in h2 { margin: 0; font-family: var(--head); font-weight: 700; font-size: 2rem; letter-spacing: -.03em; }
+  .ov-in { width: min(900px, 100%); position: relative; margin: auto; }
+  .ov-in h2 { margin: 0; font-family: var(--head); font-weight: 700; font-size: 2rem; letter-spacing: -.03em; padding-right: 3.4rem; }
   .ov-in > p { margin: .7rem 0 2.2rem; color: var(--grey); }
-  .x { position: absolute; top: 0; right: 0; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: transparent; display: grid; place-items: center; }
+  .x { position: sticky; top: .3rem; z-index: 6; margin: 0 0 -42px auto; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line); background: rgba(19,20,21,.88); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); display: grid; place-items: center; }
   .x:hover { border-color: var(--butter); color: var(--butter); }
   .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3.4rem 1.4rem; perspective: 1000px; }
-  @media (max-width: 720px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3.2rem 1rem; } }
-  @media (max-width: 460px) { .cards { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) {
+    .ov-in .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.7rem .9rem; }
+    .ov-in .cards .ccard { min-height: 170px; padding: .9rem; border-radius: 14px; }
+    .ov-in .cards .ccard .ci { width: 40px; height: 40px; } .ov-in .cards .ccard .ci svg { width: 20px; height: 20px; }
+    .ov-in .cards .ccard strong { font-size: .92rem; } .ov-in .cards .ccard small { font-size: .64rem; }
+    .ov-in .cards .ccard .cdoodle { width: 108px; height: 108px; top: -28px; right: -4px; }
+    .ov-in h2 { font-size: 1.6rem; } .ov-in > p { margin: .5rem 0 1.9rem; }
+  }
   .ccard { display: flex; flex-direction: column; justify-content: flex-end; min-height: 230px; padding: 1.2rem; border-radius: 16px; text-decoration: none; color: #141414; background: var(--c); box-shadow: 0 24px 40px -18px rgba(0,0,0,.7); transform: rotate(var(--r)); transition: transform .2s ease-out; animation: dealIn .6s cubic-bezier(.2,.9,.3,1.1) backwards; }
   .ccard:nth-child(2) { animation-delay: .06s; } .ccard:nth-child(3) { animation-delay: .12s; } .ccard:nth-child(4) { animation-delay: .18s; } .ccard:nth-child(5) { animation-delay: .24s; } .ccard:nth-child(6) { animation-delay: .3s; }
   @keyframes dealIn { from { opacity: 0; transform: translateY(40px) rotate(0); } to { opacity: 1; transform: rotate(var(--r)); } }
@@ -378,7 +386,8 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .track, .orbit .ring, .float, .status i, .about h2.big .dot { animation: none; }
-    .wrapup h2 .ch { transform: none; color: inherit; }
+    .wrapup h2 .ch { transform: none; color: inherit; animation: none; }
+    .try-arrow { animation: none; }
     .js .h-line > span, .js .fade-in, .js .reveal { transform: none; opacity: 1; }
     body.entered .h-line > span, body.entered .fade-in, .reveal.in { transition: none; }
     .doodle * { transition: none !important; animation: none !important; }
@@ -555,18 +564,12 @@
     </section>
 
     <!-- Wrap up -->
-    <section class="wrapup" id="wrapup" aria-label="End of projects">
+    <section class="wrapup" id="wrapup" aria-label="Try my color game">
       <canvas id="wrapGrid" aria-hidden="true"></canvas>
-      <div class="floaters" aria-hidden="true">
-        <svg id="wrapSvg" viewBox="0 0 200 130" focusable="false">
-          <g class="shape" data-cx="40" data-cy="70" data-depth="16"><circle class="float" cx="40" cy="70" r="20" fill="#ffd23f"/></g>
-          <g class="shape" data-cx="100" data-cy="62" data-depth="-22"><polygon class="float" style="animation-delay:-1.3s" points="100,30 128,84 72,84" fill="#f4eca0"/></g>
-          <g class="shape" data-cx="157" data-cy="73" data-depth="12"><rect class="float" style="animation-delay:-2.4s" x="140" y="56" width="34" height="34" fill="none" stroke="#ffd23f" stroke-width="5"/></g>
-          <g class="shape" data-cx="48" data-cy="112" data-depth="-14"><path class="float" style="animation-delay:-.7s" d="M20 112q14-20 28 0t28 0" fill="none" stroke="#5dff9a" stroke-width="5" stroke-linecap="round"/></g>
-        </svg>
+      <div class="tryme">
+        <h2 id="wrap-title" aria-label="Try me!"><span data-letters aria-hidden="true">TRY ME!</span></h2>
+        <svg class="try-arrow" viewBox="0 0 13 14" aria-hidden="true" focusable="false" shape-rendering="crispEdges"><path d="M5 1h3v1h-3zM5 2h3v1h-3zM5 3h3v1h-3zM5 4h3v1h-3zM5 5h3v1h-3zM5 6h3v1h-3zM1 7h11v1h-11zM2 8h9v1h-9zM3 9h7v1h-7zM4 10h5v1h-5zM5 11h3v1h-3zM6 12h1v1h-1z" fill="#f2674f"/><path d="M4 0h3v1h-3zM4 1h3v1h-3zM4 2h3v1h-3zM4 3h3v1h-3zM4 4h3v1h-3zM4 5h3v1h-3zM0 6h11v1h-11zM1 7h9v1h-9zM2 8h7v1h-7zM3 9h5v1h-5zM4 10h3v1h-3zM5 11h1v1h-1z" fill="#ffd23f"/></svg>
       </div>
-      <h2 id="wrap-title" aria-label="That's a wrap on the work."><span data-letters aria-hidden="true">That's a wrap on the work.</span></h2>
-      <p>Keep scrolling for the story and the tools.</p>
       <div class="games">
         <div class="game" id="colorGame" role="group" aria-labelledby="game-title">
         <div id="gPlay">
@@ -822,23 +825,18 @@
     box.addEventListener('pointerleave', function () { mx = my = -999; if (!raf) raf = requestAnimationFrame(loop); });
   })();
 
-  /* ---------- "that's a wrap" section: warping grid, dodging shapes, rippling headline ---------- */
+  /* ---------- "try me" section: warping grid, and a headline whose letters hop and light up near the pointer ---------- */
   (function () {
     var sec = document.getElementById('wrapup'); if (!sec) return;
-    var cv = document.getElementById('wrapGrid'), ctx = cv.getContext('2d'), svg = document.getElementById('wrapSvg');
-    var shapes = Array.prototype.slice.call(sec.querySelectorAll('.shape')).map(function (g) {
-      var cx = +g.dataset.cx, cy = +g.dataset.cy;
-      g.style.transformOrigin = cx + 'px ' + cy + 'px';
-      return { g: g, cx: cx, cy: cy, depth: +g.dataset.depth, ox: 0, oy: 0, vx: 0, vy: 0, rot: 0, vr: 0 };
-    });
+    var cv = document.getElementById('wrapGrid'), ctx = cv.getContext('2d');
 
-    /* headline: split into letters so they can ripple */
+    /* headline: split into letters so they can hop and ripple */
     var holder = sec.querySelector('[data-letters]'), letters = [];
     if (holder) {
       var words = holder.textContent.split(' '); holder.textContent = '';
       words.forEach(function (word, wi) {
         var w = document.createElement('span'); w.className = 'w';
-        word.split('').forEach(function (c) { var ch = document.createElement('span'); ch.className = 'ch'; ch.textContent = c; w.appendChild(ch); letters.push({ el: ch, x: 0, y: 0, l: 0 }); });
+        word.split('').forEach(function (c) { var ch = document.createElement('span'); ch.className = 'ch'; ch.textContent = c; ch.style.setProperty('--i', letters.length); w.appendChild(ch); letters.push({ el: ch, x: 0, y: 0, l: 0 }); });
         holder.appendChild(w); if (wi < words.length - 1) holder.appendChild(document.createTextNode(' '));
       });
     }
@@ -871,44 +869,18 @@
     }
     build(); window.addEventListener('resize', build);
     window.addEventListener('scroll', function () { if (letters.length) measureLetters(); }, { passive: true });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureLetters);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measureLetters(); });
     if (reduce) return;
 
     /* pointer state */
-    var inside = false, cx = 0, cy = 0, ux = 0, uy = 0, nx = 0, ny = 0, raf = null;
-    function setPointer(e) {
-      var r = sec.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; cx = e.clientX; cy = e.clientY;
-      var sr = svg.getBoundingClientRect(), k = sr.width / 200;
-      ux = (e.clientX - sr.left) / k; uy = (e.clientY - sr.top) / k;          /* pointer in the SVG's own units */
-      nx = (e.clientX - (r.left + r.width / 2)) / (r.width / 2); ny = (e.clientY - (r.top + r.height / 2)) / (r.height / 2);
-    }
+    var inside = false, cx = 0, cy = 0, raf = null;
+    function setPointer(e) { var r = sec.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; cx = e.clientX; cy = e.clientY; }
     function kick() { if (!raf) raf = requestAnimationFrame(frame); }
     sec.addEventListener('pointermove', function (e) { inside = true; setPointer(e); kick(); });
-    sec.addEventListener('pointerleave', function () { inside = false; mx = my = -999; nx = ny = 0; ux = uy = -999; kick(); });
-    sec.addEventListener('pointerdown', function (e) {                         /* click or tap: toss the shapes */
-      setPointer(e); inside = true;
-      shapes.forEach(function (s) {
-        var dx = s.cx + s.ox - ux, dy = s.cy + s.oy - uy, d = Math.hypot(dx, dy) || 1, f = 5 + 70 / (d + 12);
-        s.vx += dx / d * f; s.vy += dy / d * f - 3; s.vr += (Math.random() < .5 ? -1 : 1) * (7 + Math.random() * 6);
-      });
-      kick();
-    });
+    sec.addEventListener('pointerleave', function () { inside = false; mx = my = -999; kick(); });
 
     function frame() {
       var busy = inside;
-      /* shapes */
-      shapes.forEach(function (s) {
-        var tx = inside ? nx * s.depth : 0, ty = inside ? ny * s.depth * .7 : 0;      /* parallax target */
-        var dx = s.cx + s.ox - ux, dy = s.cy + s.oy - uy, d = Math.hypot(dx, dy);
-        var rx = 0, ry = 0;
-        if (inside && d < 62) { var f = (1 - d / 62) * 2.6; rx = dx / (d || 1) * f; ry = dy / (d || 1) * f; }   /* dodge the cursor */
-        s.vx = (s.vx + (tx - s.ox) * .06 + rx) * .86; s.vy = (s.vy + (ty - s.oy) * .06 + ry) * .86;
-        s.ox += s.vx; s.oy += s.vy;
-        s.vr = (s.vr + (-s.rot) * .045 + s.vx * .06) * .9; s.rot += s.vr;
-        s.g.style.transform = 'translate(' + s.ox.toFixed(2) + 'px,' + s.oy.toFixed(2) + 'px) rotate(' + s.rot.toFixed(2) + 'deg)';
-        if (Math.abs(s.vx) + Math.abs(s.vy) + Math.abs(s.vr) > .03 || Math.abs(s.ox - tx) + Math.abs(s.oy - ty) > .05 || Math.abs(s.rot) > .05) busy = true;
-      });
-      /* grid */
       pts.forEach(function (p) {
         var dx = mx - p.x, dy = my - p.y, d = Math.hypot(dx, dy), tx = 0, ty = 0;
         if (d < R) { var f = 1 - d / R; f = f * f * .42; tx = dx * f; ty = dy * f; }
@@ -916,8 +888,7 @@
         if (Math.abs(p.ox - tx) > .05 || Math.abs(p.oy - ty) > .05) busy = true;
       });
       draw();
-      /* headline letters: lift and warm up near the pointer */
-      letters.forEach(function (o) {
+      letters.forEach(function (o) {                                   /* letters lift and light up near the pointer */
         var d = inside ? Math.hypot(cx - o.x, cy - o.y) : 999, t = Math.max(0, 1 - d / 90);
         o.l += (t - o.l) * .18;
         if (Math.abs(o.l - t) > .003) busy = true;
@@ -1269,7 +1240,7 @@
 
   /* ---------- contact overlay ---------- */
   var ov = document.getElementById('contactOverlay'), openBtn = document.getElementById('openContact'), closeBtn = document.getElementById('closeContact');
-  function openOv() { ov.classList.add('open'); ov.setAttribute('aria-hidden', 'false'); document.body.classList.add('lock'); closeBtn.focus(); }
+  function openOv() { ov.scrollTop = 0; ov.classList.add('open'); ov.setAttribute('aria-hidden', 'false'); document.body.classList.add('lock'); closeBtn.focus(); }
   function closeOv() { ov.classList.remove('open'); ov.setAttribute('aria-hidden', 'true'); document.body.classList.remove('lock'); openBtn.focus(); }
   openBtn.addEventListener('click', openOv); closeBtn.addEventListener('click', closeOv);
   ov.addEventListener('click', function (e) { if (e.target === ov) closeOv(); });
