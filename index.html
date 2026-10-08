@@ -1243,6 +1243,30 @@
     setTimeout(jig, 2400); setTimeout(blink, 1800);
   })();
 
+  /* ---------- gallery overlay ("View all designs") ---------- */
+  var works = JSON.parse(document.getElementById('works-data').textContent);
+  var gov = document.getElementById('galleryOverlay'), gGrid = document.getElementById('gal-grid'), gClose = document.getElementById('closeGallery'), gOpener = null;
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+  function openGallery(key, btn) {
+    var set = works[key]; if (!set) return;
+    gOpener = btn;
+    document.getElementById('gal-title').textContent = set.title;
+    document.getElementById('gal-count').textContent = set.items.length + ' designs. Click one to open the full-size image.';
+    gGrid.innerHTML = set.items.map(function (i) {
+      return '<a href="' + i.o + '" target="_blank" rel="noopener"><img src="' + i.t + '" width="' + i.w + '" height="' + i.h + '" alt="' + esc(i.n) + '" loading="lazy" decoding="async"></a>';
+    }).join('');
+    gov.scrollTop = 0; gov.classList.add('open'); gov.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lock'); gClose.focus();
+  }
+  function closeGallery() {
+    gov.classList.remove('open'); gov.setAttribute('aria-hidden', 'true'); gGrid.innerHTML = '';
+    document.body.classList.remove('lock'); if (gOpener) gOpener.focus();
+  }
+  document.querySelectorAll('[data-gallery]').forEach(function (b) { b.addEventListener('click', function () { openGallery(b.dataset.gallery, b); }); });
+  gClose.addEventListener('click', closeGallery);
+  gov.addEventListener('click', function (e) { if (e.target === gov) closeGallery(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && gov.classList.contains('open')) closeGallery(); });
+
   /* ---------- contact overlay ---------- */
   var ov = document.getElementById('contactOverlay'), openBtn = document.getElementById('openContact'), closeBtn = document.getElementById('closeContact');
   function openOv() { ov.classList.add('open'); ov.setAttribute('aria-hidden', 'false'); document.body.classList.add('lock'); closeBtn.focus(); }
