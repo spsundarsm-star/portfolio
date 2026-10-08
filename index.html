@@ -190,28 +190,7 @@
   .wrapup h2 .w { display: inline-block; white-space: nowrap; }
   .wrapup h2 .ch { display: inline-block; transform: translateY(calc(var(--l, 0) * -12px)) scale(calc(1 + var(--l, 0) * .16)); color: color-mix(in srgb, var(--butter) calc(var(--l, 0) * 100%), var(--paper)); will-change: transform; }
   /* ---------- three games in a row ---------- */
-  .games { width: min(1120px, 100%); margin: 2.6rem auto 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; align-items: stretch; }
-  @media (max-width: 1020px) { .games { grid-template-columns: 1fr; width: min(460px, 100%); } }
-  .kern-stage, .ratio-stage { position: relative; height: 132px; background: #131415; border: 1px solid rgba(255,255,255,.1); border-radius: 12px; display: grid; place-items: center; overflow: hidden; }
-  .kern-measure { position: absolute; left: 0; top: 0; visibility: hidden; white-space: nowrap; pointer-events: none; font: 800 100px/1.15 var(--head); font-kerning: normal; letter-spacing: 0; }
-  .kern-word { position: relative; font-family: var(--head); font-weight: 800; line-height: 1.15; height: 1.15em; }
-  .kl, .kghost { position: absolute; top: 0; left: 0; user-select: none; -webkit-user-select: none; border-radius: 6px; }
-  .kl { cursor: grab; touch-action: none; color: var(--paper); transition: color .15s ease; }
-  .kl:hover { color: var(--butter); }
-  .kl.anchor { cursor: default; color: #a9abb2; }
-  .kl.drag { color: var(--sun); cursor: grabbing; }
-  .kl.ok { color: var(--sun); }
-  .kl.settle { transition: transform .6s cubic-bezier(.3,.8,.3,1), color .15s ease; }
-  .kghost { color: transparent; -webkit-text-stroke: 1.2px rgba(255,210,63,.75); pointer-events: none; }
-  .ratio-prompt { font-family: var(--head); font-weight: 600; font-size: 1.05rem; }
-  .ratio-prompt b { color: var(--sun); font-weight: 700; }
-  .ratio-num { font-family: var(--mono); font-size: .76rem; font-weight: 400; color: var(--grey); margin-left: .35rem; }
-  .ratio-box { transition: box-shadow .2s ease; }
-  .ratio-box.ok { box-shadow: 0 0 0 3px #fff, 0 0 24px rgba(255,210,63,.55); }
-  .ratio-stage { background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px); background-size: 22px 22px; }
-  .ratio-box, .ratio-ghost { grid-area: 1 / 1; height: 88px; border-radius: 6px; }
-  .ratio-box { background: var(--sun); }
-  .ratio-ghost { border: 2px dashed rgba(244,244,242,.85); pointer-events: none; }
+  .games { width: min(460px, 100%); margin: 2.6rem auto 0; }
 
   /* ---------- colour-matching game ---------- */
   .game { min-height: 430px; padding: 1.3rem 1.4rem 1.4rem; text-align: left; background: rgba(27,28,30,.92); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 24px 50px -28px rgba(0,0,0,.8); display: flex; flex-direction: column; }
@@ -408,7 +387,6 @@
     .ccard { animation: none; }
     .cdoodle, .overlay.open .cdoodle { animation: none !important; }
     .sw, .game-btn { transition: none; }
-    .kl, .kl.settle { transition: none; }
     .stage .book, .fs, .cover-doodle, .stage.celebrate .fs { animation: none !important; }
     .book-in, .fl, .cover-doodle, .cover-doodle .pupil { transition: none; }
     .book-in { transform: none; }
@@ -619,56 +597,6 @@
           <div class="game-foot"><span></span><button class="game-btn" type="button" id="gAgain">Play again</button></div>
         </div>
       </div>
-        <div class="game" id="kernGame" role="group" aria-labelledby="kern-title">
-          <div id="kPlay">
-            <div class="game-head">
-              <h3 id="kern-title">Kern it</h3>
-              <span class="game-stat"><span id="kRound">1</span>/3 &middot; <span id="kScore">0</span> points</span>
-            </div>
-            <div class="kern-stage" id="kStage">
-              <span class="kern-measure" id="kMeasure" aria-hidden="true"></span>
-              <div class="kern-word" id="kWord"></div>
-            </div>
-            <div class="game-msg" id="kHint">Drag each letter sideways. It clicks into place and turns yellow when the gap looks right.</div>
-            <div class="game-foot">
-              <div class="game-msg" id="kMsg" role="status" aria-live="polite"></div>
-              <button class="game-btn" type="button" id="kBtn">Lock it in</button>
-            </div>
-          </div>
-          <div id="kRes" hidden>
-          <div class="game-head"><h3>Your kerning score</h3><span class="game-stat">3 words</span></div>
-          <div class="res-big" id="kPct">0%</div>
-          <div class="res-rank" id="kRank"></div>
-          <div class="res-dots" id="kDots" aria-hidden="true"></div>
-          <div class="game-msg" id="kBest"></div>
-          <div class="game-foot"><span></span><button class="game-btn" type="button" id="kAgain">Play again</button></div>
-        </div>
-        </div>
-        <div class="game" id="ratioGame" role="group" aria-labelledby="ratio-title">
-          <div id="rPlay">
-            <div class="game-head">
-              <h3 id="ratio-title">Hit the ratio</h3>
-              <span class="game-stat"><span id="rRound">1</span>/5 &middot; <span id="rScore">0</span> points</span>
-            </div>
-            <div class="ratio-prompt">Make it <b id="rGoal">16:9</b> <span class="ratio-num" id="rNum">1.78 : 1</span></div>
-            <div class="ratio-stage" id="rStage"><div class="ratio-box" id="rBox"></div><div class="ratio-ghost" id="rGhost" hidden></div></div>
-            <div class="sliders">
-              <div class="srow"><label for="rW">Width</label><input type="range" id="rW" min="0.8" max="2.5" step="0.005" value="1.2"><output id="rOut"></output></div>
-            </div>
-            <div class="game-foot">
-              <div class="game-msg" id="rMsg" role="status" aria-live="polite">Slide until your number matches the target.</div>
-              <button class="game-btn" type="button" id="rBtn">Lock it in</button>
-            </div>
-          </div>
-          <div id="rRes" hidden>
-          <div class="game-head"><h3>Your proportion score</h3><span class="game-stat">5 rounds</span></div>
-          <div class="res-big" id="rPct">0%</div>
-          <div class="res-rank" id="rRank"></div>
-          <div class="res-dots" id="rDots" aria-hidden="true"></div>
-          <div class="game-msg" id="rBest"></div>
-          <div class="game-foot"><span></span><button class="game-btn" type="button" id="rAgain">Play again</button></div>
-        </div>
-        </div>
       </div>
     </section>
 
@@ -1077,144 +1005,7 @@
       sH.value = rnd(0, 359); sS.value = rnd(40, 80); sL.value = 50; paintSliders(); })();
   })();
 
-  /* ---------- design game: kern it (drag letters until the spacing looks even; the font's own kerning is the answer key) ---------- */
-  (function () {
-    var g = document.getElementById('kernGame'); if (!g) return;
-    var $ = function (id) { return document.getElementById(id); };
-    var stage = $('kStage'), wordEl = $('kWord'), meas = $('kMeasure'), btn = $('kBtn'), msg = $('kMsg'), hint = $('kHint');
-    var WORDS = ['AVA', 'WAVE', 'LATTE'], ROUNDS = WORDS.length, SNAP = .026;   /* short words, gentle misses; a letter clicks into place when it is this close (in em) */
-    var round = 0, total = 0, locked = false, scores = [], text = '', size = 60, xs = [], wEm = 1, offs = [], spans = [], ghosts = [], drag = null;
-    function rnd(a, b) { return a + Math.random() * (b - a); }
-
-    function measure(t) {            /* where each letter sits when the browser applies the font's kerning */
-      var out = [], w = 0;
-      try {
-        meas.textContent = t; var tn = meas.firstChild, base = meas.getBoundingClientRect(), r = document.createRange();
-        for (var i = 0; i < t.length; i++) { r.setStart(tn, i); r.setEnd(tn, i + 1); out.push((r.getBoundingClientRect().left - base.left) / 100); }
-        w = base.width / 100;
-      } catch (e) { w = 0; }
-      if (!(w > 0) || out.some(function (v) { return isNaN(v); })) { out = t.split('').map(function (_, i) { return i * .62; }); w = t.length * .62; }
-      return { xs: out, w: w };
-    }
-    function place(sp, i, v) { sp.style.left = (xs[i] * size) + 'px'; sp.style.transform = 'translateX(' + (v * size) + 'px)'; }
-    function layout() {
-      var m = measure(text); xs = m.xs; wEm = m.w;
-      size = Math.max(34, Math.min(84, Math.max(120, (stage.clientWidth || 280) - 28) / wEm));
-      wordEl.style.fontSize = size + 'px'; wordEl.style.width = (wEm * size) + 'px';
-      spans.forEach(function (sp, i) { place(sp, i, offs[i]); });
-      ghosts.forEach(function (gh) { place(gh.el, gh.i, gh.v); });
-    }
-    function setOff(i, v) {
-      v = Math.max(-.3, Math.min(.3, v));
-      var ok = Math.abs(v) < SNAP; if (ok) v = 0;                 /* gentle magnet: it clicks into the right spot */
-      offs[i] = v; place(spans[i], i, v); spans[i].classList.toggle('ok', ok);
-      spans[i].setAttribute('aria-valuenow', Math.round(v * 100));
-      if (!locked) {
-        var left = 0; for (var k = 1; k < offs.length; k++) if (offs[k] !== 0) left++;
-        msg.textContent = left === 0 ? 'Everything clicked into place. Lock it in!' : '';
-      }
-    }
-    function build() {
-      text = WORDS[round - 1]; wordEl.innerHTML = ''; spans = []; ghosts = []; offs = []; drag = null;
-      wordEl.setAttribute('aria-label', 'Word to kern: ' + text);
-      text.split('').forEach(function (ch, i) {
-        var sp = document.createElement('span'); sp.className = 'kl' + (i === 0 ? ' anchor' : ''); sp.textContent = ch;
-        offs.push(i === 0 ? 0 : (Math.random() < .5 ? -1 : 1) * rnd(.06, .12));
-        if (i > 0) {
-          sp.tabIndex = 0; sp.setAttribute('role', 'slider'); sp.setAttribute('aria-label', 'Letter ' + ch + ', position ' + (i + 1) + ' of ' + text.length);
-          sp.setAttribute('aria-valuemin', -35); sp.setAttribute('aria-valuemax', 35); sp.setAttribute('aria-valuenow', Math.round(offs[i] * 100));
-          sp.addEventListener('pointerdown', function (e) {
-            if (locked) return; drag = { i: i, x: e.clientX, v: offs[i] };
-            try { sp.setPointerCapture(e.pointerId); } catch (_) {} sp.classList.add('drag'); sp.focus(); e.preventDefault();
-          });
-          sp.addEventListener('pointermove', function (e) { if (drag && drag.i === i) setOff(i, drag.v + (e.clientX - drag.x) / size); });
-          var end = function () { if (drag && drag.i === i) { drag = null; sp.classList.remove('drag'); } };
-          sp.addEventListener('pointerup', end); sp.addEventListener('pointercancel', end); sp.addEventListener('lostpointercapture', end);
-          sp.addEventListener('keydown', function (e) {
-            if (locked) return; var step = (e.shiftKey ? 5 : 1) / size;
-            if (e.key === 'ArrowLeft') { setOff(i, offs[i] - step); e.preventDefault(); } else if (e.key === 'ArrowRight') { setOff(i, offs[i] + step); e.preventDefault(); }
-          });
-        } else { sp.setAttribute('aria-hidden', 'true'); }
-        wordEl.appendChild(sp); spans.push(sp);
-      });
-      layout();
-    }
-    function verdict(p) { return p >= 92 ? 'Spot on.' : p >= 78 ? 'Very even.' : p >= 58 ? 'Close.' : p >= 35 ? 'Uneven.' : 'Quite uneven.'; }
-    function lock() {
-      locked = true; var sum = 0;
-      for (var i = 1; i < offs.length; i++) sum += Math.abs(offs[i]);
-      var mean = sum / Math.max(1, offs.length - 1), pts = Math.max(0, Math.min(100, Math.round(100 - Math.max(0, mean - .012) * 450))); total += pts; scores.push(pts);
-      spans.forEach(function (sp, i) {         /* outline = where you put it; solid letters slide to the right spot */
-        if (i > 0) {
-          var gh = document.createElement('span'); gh.className = 'kghost'; gh.textContent = text[i]; gh.setAttribute('aria-hidden', 'true');
-          wordEl.insertBefore(gh, wordEl.firstChild); place(gh, i, offs[i]); ghosts.push({ el: gh, i: i, v: offs[i] });
-        }
-        sp.tabIndex = -1; sp.classList.add('settle'); place(sp, i, 0);
-      });
-      $('kScore').textContent = total; msg.textContent = '+' + pts + '. ' + verdict(pts); hint.textContent = 'Outline: where you left them. Solid: the right spacing.';
-      btn.textContent = round < ROUNDS ? 'Next word' : 'See results';
-    }
-    function newRound() { round++; locked = false; $('kRound').textContent = round; msg.textContent = ''; hint.textContent = 'Drag each letter sideways. It clicks into place and turns yellow when the gap looks right.'; btn.textContent = 'Lock it in'; build(); }
-    function rank(p) { return p >= 90 ? 'Type director' : p >= 75 ? 'Sharp typesetter' : p >= 55 ? 'Finding the rhythm' : 'Keep kerning'; }
-    function results() {
-      var pct = Math.round(total / ROUNDS), best = pct;
-      try { var old = parseInt(localStorage.getItem('kernGameBest'), 10); if (!isNaN(old)) best = Math.max(old, pct); localStorage.setItem('kernGameBest', String(best)); } catch (e) {}
-      $('kPlay').hidden = true; $('kRes').hidden = false; $('kPct').textContent = pct + '%'; $('kRank').textContent = rank(pct);
-      $('kBest').textContent = (pct >= best && pct > 0 ? 'New best: ' : 'Best: ') + best + '%';
-      var dots = $('kDots'); dots.innerHTML = ''; scores.forEach(function (sc, i) { var d = document.createElement('span'); d.title = WORDS[i]; d.textContent = sc; dots.appendChild(d); });
-      try { $('kAgain').focus({ preventScroll: true }); } catch (e) {}
-    }
-    btn.addEventListener('click', function () { if (!locked) lock(); else if (round < ROUNDS) newRound(); else results(); });
-    $('kAgain').addEventListener('click', function () { round = 0; total = 0; scores = []; $('kScore').textContent = 0; $('kRes').hidden = true; $('kPlay').hidden = false; newRound(); });
-    round = 1; build();
-    window.addEventListener('resize', layout);
-    if (document.fonts) { if (document.fonts.ready) document.fonts.ready.then(layout); if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', layout); }
-  })();
-
-  /* ---------- design game: hit the ratio (judge proportions by eye) ---------- */
-  (function () {
-    var g = document.getElementById('ratioGame'); if (!g) return;
-    var $ = function (id) { return document.getElementById(id); };
-    var box = $('rBox'), ghost = $('rGhost'), slider = $('rW'), out = $('rOut'), goal = $('rGoal'), btn = $('rBtn'), msg = $('rMsg');
-    var GOALS = [['the golden ratio', 1.618], ['16:9', 16 / 9], ['4:3', 4 / 3], ['3:2', 1.5], ['2:1', 2], ['A4 paper', Math.SQRT2]];
-    var H = 88, ROUNDS = 5, order = [], round = 0, total = 0, locked = false, target = 1, scores = [], labels = [];
-    function rnd(a, b) { return a + Math.random() * (b - a); }
-    function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-    function apply() {
-      var r = +slider.value; box.style.width = (H * r) + 'px'; out.textContent = r.toFixed(2);
-      box.classList.toggle('ok', !locked && Math.abs(r - target) / target < .02);   /* glows when you are within 2% */
-    }
-    function newRound() {
-      round++; locked = false; slider.disabled = false; ghost.hidden = true;
-      target = order[round - 1][1]; goal.textContent = order[round - 1][0]; $('rNum').textContent = target.toFixed(2) + ' : 1'; $('rRound').textContent = round;
-      var v; do { v = target * (1 + (Math.random() < .5 ? -1 : 1) * rnd(.16, .38)); } while (v < .85 || v > 2.45);   /* starts a little way off, never on the answer */
-      slider.value = v.toFixed(3); apply(); msg.textContent = 'Slide until your number matches the target.'; btn.textContent = 'Lock it in';
-    }
-    function verdict(p) { return p >= 94 ? 'Spot on.' : p >= 80 ? 'Very close.' : p >= 55 ? 'Close.' : p >= 25 ? 'A bit off.' : 'Quite far off.'; }
-    function lock() {
-      locked = true; slider.disabled = true; var r = +slider.value, err = Math.abs(r - target) / target * 100;
-      var pts = Math.max(0, Math.min(100, Math.round(100 - Math.max(0, err - 1) * 5))); total += pts; scores.push(pts); labels.push(order[round - 1][0]);
-      ghost.style.width = (H * target) + 'px'; ghost.hidden = false; box.classList.remove('ok');
-      $('rScore').textContent = total; msg.textContent = '+' + pts + '. ' + verdict(pts) + ' Dashed outline: the target.';
-      btn.textContent = round < ROUNDS ? 'Next round' : 'See results';
-    }
-    function rank(p) { return p >= 90 ? 'Golden eye' : p >= 75 ? 'Layout pro' : p >= 55 ? 'Decent proportions' : 'Back to the grid'; }
-    function results() {
-      var pct = Math.round(total / ROUNDS), best = pct;
-      try { var old = parseInt(localStorage.getItem('ratioGameBest'), 10); if (!isNaN(old)) best = Math.max(old, pct); localStorage.setItem('ratioGameBest', String(best)); } catch (e) {}
-      $('rPlay').hidden = true; $('rRes').hidden = false; $('rPct').textContent = pct + '%'; $('rRank').textContent = rank(pct);
-      $('rBest').textContent = (pct >= best && pct > 0 ? 'New best: ' : 'Best: ') + best + '%';
-      var dots = $('rDots'); dots.innerHTML = ''; scores.forEach(function (sc, i) { var d = document.createElement('span'); d.title = labels[i]; d.textContent = sc; dots.appendChild(d); });
-      try { $('rAgain').focus({ preventScroll: true }); } catch (e) {}
-    }
-    function start() { order = shuffle(GOALS.slice()).slice(0, ROUNDS); round = 0; total = 0; scores = []; labels = []; $('rScore').textContent = 0; $('rRes').hidden = true; $('rPlay').hidden = false; newRound(); }
-    slider.addEventListener('input', apply);
-    btn.addEventListener('click', function () { if (!locked) lock(); else if (round < ROUNDS) newRound(); else results(); });
-    $('rAgain').addEventListener('click', start);
-    start();
-  })();
-
-  /* the games sit inside the wrap-up section: clicks and drags in them must not toss the shapes */
+  /* the game sits inside the wrap-up section: clicks and drags in it must not toss the shapes */
   (function () { var gs = document.querySelector('.games'); if (gs) gs.addEventListener('pointerdown', function (e) { e.stopPropagation(); }); })();
 
   /* ---------- doodle portrait: lights up near the cursor, eyes follow, blinks, winks on click ---------- */
